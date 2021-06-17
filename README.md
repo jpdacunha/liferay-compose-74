@@ -24,3 +24,7 @@ Docker compose for non clustered Liferay project (e.g: for development use only)
     ```console
      ./liferay-compose-73/utils/portainer-start.sh
     ```
+3. Extract a file from inside an existing container
+    ```console   
+      docker cp <containerId>:/file/path/within/container /host/path/target
+     ```
