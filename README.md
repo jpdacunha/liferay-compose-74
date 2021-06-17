@@ -12,7 +12,7 @@ Docker compose for non clustered Liferay project (e.g: for development use only)
     ```
 2. Start docker compose in detached mode
     ```console
-     sudo docker-compose -d up
+     sudo docker-compose up -d
     ```
 
 ## Tips :
@@ -24,3 +24,17 @@ Docker compose for non clustered Liferay project (e.g: for development use only)
     ```console
      ./liferay-compose-73/utils/portainer-start.sh
     ```
+3. Extract a file from inside an existing container
+    ```console   
+      docker cp <containerId>:/file/path/within/container /host/path/target
+     ```
+4. Running docker-compose partially
+    ```console   
+      sudo docker-compose up -d <serviceName>
+     ```
+     Example to start database service only
+      ```console      
+      sudo docker-compose up -d mysql
+     ```      
+
+
