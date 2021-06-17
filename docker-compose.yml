@@ -56,13 +56,17 @@ services:
       - liferay-osgi-marketplace:/opt/liferay/osgi/marketplace
       - liferay-osgi-modules:/opt/liferay/osgi/modules
       - liferay-osgi-war:/opt/liferay/osgi/war
-#  kibana:
-#    image: kibana:7.13.2
-#    container_name: kibana
-#    networks:
-#      - lfrnet
-#    ports:
-#      - "5601:5601"
+  kibana:
+    image: kibana:7.13.2
+    container_name: kibana
+    depends_on:
+      - elasticsearch
+    networks:
+      - fs73dxp1
+    ports:
+      - "5601:5601"
+    volumes:
+      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
 networks:
   fs73dxp1:
     name: fs73dxp1
