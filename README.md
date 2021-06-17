@@ -28,3 +28,13 @@ Docker compose for non clustered Liferay project (e.g: for development use only)
     ```console   
       docker cp <containerId>:/file/path/within/container /host/path/target
      ```
+4. Running docker-compose partially
+    ```console   
+      sudo docker-compose up -d <serviceName>
+     ```
+     Example to start database service only
+      ```console      
+      sudo docker-compose up -d mysql
+     ```      
+
+
