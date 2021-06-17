@@ -12,7 +12,7 @@ Docker compose for non clustered Liferay project (e.g: for development use only)
     ```
 2. Start docker compose in detached mode
     ```console
-     sudo docker-compose -d up
+     sudo docker-compose up -d
     ```
 
 ## Tips :
