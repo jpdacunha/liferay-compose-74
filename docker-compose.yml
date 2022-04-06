@@ -1,13 +1,13 @@
 version: "3.7"
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.2
+    image: elasticsearch:7.17.2
     container_name: elasticsearch
     entrypoint: /usr/share/elasticsearch/docker-entrypoint-es.sh
     environment: 
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
     networks:
-      - fs73dxp1
+      - fs74dxp1
     ports:
       - 9400:9200
       - 9500:9300
@@ -24,7 +24,7 @@ services:
     image: mysql:5.7.29
     container_name: mysql
     networks:
-      - fs73dxp1
+      - fs74dxp1
     ports:
       - 3307:3306
     environment:
@@ -35,7 +35,7 @@ services:
       - ./mysql/config/my.cnf:/etc/mysql/conf.d/my.cnf
       - mysql:/var/lib/mysql
   tomcat:
-    image: liferay/dxp:7.3.10-dxp-1
+    image: liferay/dxp:7.4.13-u18
     container_name: tomcat
     depends_on:
       - elasticsearch
@@ -45,12 +45,13 @@ services:
       LIFERAY_RETRY_PERIOD_JDBC_PERIOD_ON_PERIOD_STARTUP_PERIOD_MAX_PERIOD_RETRIES: 10
       LIFERAY_JVM_OPTS: "-Xms2560m -Xmx4096m"
     networks: 
-      - fs73dxp1
+      - fs74dxp1
     ports: 
       - 8080:8080
       - 127.0.0.1:11311:11311
     volumes:
       - ./mount:/mnt/liferay
+      - liferay-tools:/opt/liferay/tools
       - liferay-data:/opt/liferay/data
       - liferay-osgi-configs:/opt/liferay/osgi/configs
       - liferay-osgi-marketplace:/opt/liferay/osgi/marketplace
@@ -62,18 +63,19 @@ services:
     depends_on:
       - elasticsearch
     networks:
-      - fs73dxp1
+      - fs74dxp1
     ports:
       - "5601:5601"
     volumes:
       - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
 networks:
-  fs73dxp1:
-    name: fs73dxp1
+  fs74dxp1:
+    name: fs74dxp1
 volumes:
   elasticsearch-data:
   elasticsearch-plugins:
   liferay-data:
+  liferay-tools:
   liferay-osgi-configs:
   liferay-osgi-marketplace:
   liferay-osgi-modules:

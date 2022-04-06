@@ -17,7 +17,7 @@ sleep 3s
 echo " Done."
 
 echo " Waiting for readiness of dependent servers ..."
-./utils/spinner.sh sleep 5m
+./utils/spinner.sh sleep 30s
 
 echo " Starting Liferay server"
 sudo docker-compose up -d tomcat
