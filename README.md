@@ -22,7 +22,7 @@ Docker compose for non clustered Liferay project (e.g: for development use only)
     ```
 2. Manage your containers using portainer
     ```console
-     ./liferay-compose-73/utils/portainer-start.sh
+     ./liferay-compose-74/utils/portainer-start.sh
     ```
 3. Extract a file from inside an existing container
     ```console   
