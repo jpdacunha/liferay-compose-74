@@ -1,9 +1,9 @@
-# liferay-compose-73
+# liferay-compose-74
 Docker compose for non clustered Liferay project (e.g: for development use only)
 
 ## Prerequisites
-1. Properly install docker (tested with docker 20.10.7)
-2. Properly install docker-compose (tested with docker compose 1.28.4)
+1. Properly install docker (tested with docker 20.10.16)
+2. Properly install docker-compose (tested with docker compose 2.5.0)
 
 ## Quick Start :
 1. Setup permissions on sh files
