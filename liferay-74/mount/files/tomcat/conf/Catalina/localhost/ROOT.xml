@@ -14,7 +14,7 @@
 		auth="Container" 
 		type="javax.sql.DataSource" 
 		driverClassName="com.mysql.cj.jdbc.Driver" 
-		url="jdbc:mysql://mysql/lportal74?useUnicode=true&amp;characterEncoding=UTF-8" 
+		url="jdbc:mysql://lc74-mysql/lc74lportal?useUnicode=true&amp;characterEncoding=UTF-8" 
 		username="root" 
 		password="password" 
 		maxActive="20"

@@ -1,45 +1,41 @@
 version: "3.7"
 services:
-  elasticsearch:
-    image: elasticsearch:7.17.2
-    container_name: elasticsearch
-    entrypoint: /usr/share/elasticsearch/docker-entrypoint-es.sh
-    environment: 
-      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+  lc74-elasticsearch:
+    container_name: lc74-elasticsearch
+    build:
+      dockerfile: elasticsearch/Dockerfile
+      context: .
     networks:
       - fs74dxp1
     ports:
-      - 9400:9200
-      - 9500:9300
+      - 9200:9200
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
-      - ./elasticsearch/config/docker-entrypoint-es.sh:/usr/share/elasticsearch/docker-entrypoint-es.sh
-      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - elasticsearch-data:/usr/share/elasticsearch/data
       - elasticsearch-plugins:/usr/share/elasticsearch/plugins
-  mysql:
-    image: mysql:5.7.29
-    container_name: mysql
+  lc74-mysql:
+    image: mysql:8
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    container_name: lc74-mysql
     networks:
       - fs74dxp1
     ports:
-      - 3307:3306
+      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: lportal
+      MYSQL_USER: liferay
+      MYSQL_PASSWORD: liferay
+      MYSQL_DATABASE: lc74lportal
     volumes:
-      - ./mysql/config/lportal.sql:/docker-entrypoint-initdb.d/lportal.sql
-      - ./mysql/config/my.cnf:/etc/mysql/conf.d/my.cnf
       - mysql:/var/lib/mysql
-  tomcat:
-    image: liferay/dxp:7.4.13-u22
-    container_name: tomcat
+  lc74-liferay:
+    image: liferay/dxp:2024.q2.3
+    container_name: lc74-liferay
     depends_on:
-      - elasticsearch
-      - mysql
+      - lc74-mysql
     environment:
       LIFERAY_RETRY_PERIOD_JDBC_PERIOD_ON_PERIOD_STARTUP_PERIOD_DELAY: 10
       LIFERAY_RETRY_PERIOD_JDBC_PERIOD_ON_PERIOD_STARTUP_PERIOD_MAX_PERIOD_RETRIES: 10
@@ -50,18 +46,18 @@ services:
       - 8080:8080
       - 127.0.0.1:11311:11311
     volumes:
-      - ./mount:/mnt/liferay
+      - ./liferay-74/mount:/mnt/liferay
       - liferay-tools:/opt/liferay/tools
       - liferay-data:/opt/liferay/data
       - liferay-osgi-configs:/opt/liferay/osgi/configs
       - liferay-osgi-marketplace:/opt/liferay/osgi/marketplace
       - liferay-osgi-modules:/opt/liferay/osgi/modules
       - liferay-osgi-war:/opt/liferay/osgi/war
-  kibana:
-    image: kibana:7.13.2
+  lc74-kibana:
+    image: kibana:8.11.4
     container_name: kibana
     depends_on:
-      - elasticsearch
+      - lc74-elasticsearch
     networks:
       - fs74dxp1
     ports:
