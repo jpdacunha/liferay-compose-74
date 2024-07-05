@@ -15,10 +15,10 @@ sudo docker compose up -d lc74-elasticsearch
 sleep 3s
 echo " Done."
 
-#echo " Starting Kibana server"
-#sudo docker compose up -d lc74-kibana
-#sleep 3s
-#echo " Done."
+echo " Starting Kibana server"
+sudo docker compose up -d lc74-kibana
+sleep 3s
+echo " Done."
 
 echo " Waiting for readiness of dependent servers ..."
 ./utils/spinner.sh sleep 30s
