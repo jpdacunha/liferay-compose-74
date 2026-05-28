@@ -14,13 +14,13 @@
 #
 # Use a descriptive name for your cluster:
 #
-cluster.name: LC74LiferayElasticsearchCluster
+cluster.name: LiferayElasticsearchCluster
 #
 # ------------------------------------ Node ------------------------------------
 #
 # Use a descriptive name for the node:
 #
-node.name: LC74LiferayElasticsearchCluster-node-1
+node.name: LiferayElasticsearchCluster-node-1
 #
 # Add custom attributes to the node:
 #

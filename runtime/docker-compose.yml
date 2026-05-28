@@ -46,9 +46,11 @@ services:
       retries: 20
       start_period: 30s
   liferay:
-    image: liferay/dxp:2025.q2.12
+    image: liferay/dxp:2026.q2.0
     depends_on:
       database:
+        condition: service_healthy
+      elasticsearch:
         condition: service_healthy
     environment:
       LIFERAY_RETRY_PERIOD_JDBC_PERIOD_ON_PERIOD_STARTUP_PERIOD_DELAY: 10
@@ -67,8 +69,14 @@ services:
       - liferay-osgi-marketplace:/opt/liferay/osgi/marketplace
       - liferay-osgi-modules:/opt/liferay/osgi/modules
       - liferay-osgi-war:/opt/liferay/osgi/war
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8080/c/portal/robots >/dev/null || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 90s
   kibana:
-    image: kibana:8.17.10
+    image: kibana:8.19.15
     networks:
       - fs74dxp1
     ports:
