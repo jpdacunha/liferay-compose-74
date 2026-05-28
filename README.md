@@ -12,13 +12,14 @@ Docker compose for non clustered Liferay project (e.g: for development use only)
     ```
 2. Start docker compose in detached mode
     ```console
-     sudo docker-compose up -d
+     ./runtime/scripts/start.sh
     ```
 
 ## Tips :
 1. Remove all container and volumes create by **this** docker compose file 
     ```console
-     sudo docker-compose rm -s -v
+    cd runtime
+    sudo docker compose down -v
     ```
 2. Manage your containers using portainer
     ```console
@@ -30,11 +31,13 @@ Docker compose for non clustered Liferay project (e.g: for development use only)
      ```
 4. Running docker-compose partially
     ```console   
-      sudo docker-compose up -d <serviceName>
+    cd runtime
+    sudo docker compose up -d <serviceName>
      ```
      Example to start database service only
       ```console      
-      sudo docker-compose up -d mysql
+    cd runtime
+    sudo docker compose up -d database
      ```      
 
 
